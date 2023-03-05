@@ -1,0 +1,23 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model movie {
+  id        String      @id @unique(map: "Movie_id_key") @default(uuid())
+  name      String      @unique(map: "Movie_name_key")
+  genre     movie_genre
+  rating    Int
+  duration  Int
+  createdat DateTime?   @default(now())
+}
+
+enum movie_genre {
+  action
+  comedy
+  drama
+}
